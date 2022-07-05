@@ -1,0 +1,22 @@
+******PSQL Notes*****
+
+Its a sql database
+	server[localhost] (default is localhost): but user can set other too.
+	default database[postgres].
+	username[postgres](default) : user can be set too.
+	password(same when installation): ...
+	postgres=#(default database): ==>>
+	
+	****Semi Colon must(;)**** 
+	
+	** \(all cmds in psql starts with "\")
+	** \? (get all comds)						
+	** \l (display all database)								
+	** CREATE DATABASE practice (create database)
+	** \c practice (connect to practice database)						
+	** CREATE TABLE products (id int, name varchar(50), price int, on_sale boolean ); (create table in practice database)
+	** \d (list all tables)
+	** DROP TABLE(to delete the table)
+			******Use single inverted comma for string ('')******
+	** INSERT INTO table_name (fields_name1, fields_name2) values (value1, value2)	
+	** SELECT * FROM table_name (get all values of the particular table)

@@ -1,0 +1,38 @@
+*****Strapi******
+	npx create-strapi-app@latest projectname --quickstart
+	
+	****always save and publish****
+	
+admin panel: users info
+users & perm: roles,providers etc.
+
+perms:	find -- public can see all products
+		findOne -- public can see all products/id
+	
+
+roles:-
+public: without login
+authenticated: registered and accessed data
+
+// strapi-api/config/database.js
+module.exports = ({ env }) => ({
+  connection: {
+    client: "postgres",
+    connection: {
+      host: env("DATABASE_HOST", "localhost"),
+      port: env.int("DATABASE_PORT", 5432),
+      database: env("DATABASE_NAME", "strapidatabase"),
+      user: env("DATABASE_USERNAME", "postgres"),
+      password: env("DATABASE_PASSWORD", "postgres"),
+      schema: env("DATABASE_SCHEMA", "public"),
+      // Not required
+      // ssl: {
+      //   rejectUnauthorized: env.bool("DATABASE_SSL_SELF", false),
+      // },
+      ssl: false,
+    },
+    debug: false,
+  },
+});
+
+

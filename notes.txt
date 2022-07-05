@@ -1,0 +1,10 @@
+**if nodemon index.js not running => install nodemon in gobally and run npx nodemon index.js
+
+**1st req then res
+
+**ReactDOM.render(<App />, document.getElementById("root")); does work in React 18 =>  use instead
+const root = ReactDOM.createRoot(document.getElementById("root"));
+
+** use import ReactDOM from "react-dom/client"; for react18
+
+**npm config set legacy-peer-deps true => use if material ui install problem

@@ -1,0 +1,11 @@
+******This function will parse string into number and will only accept numbers******
+
+ const handelAmount = (e) => {
+    const val = parseInt(e.target.value);
+    console.log(val);
+    if (isNaN(val)) {
+      setAmount("");
+      return;
+    }
+    setAmount(val);
+  };
