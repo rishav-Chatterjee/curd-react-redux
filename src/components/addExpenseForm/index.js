@@ -4,6 +4,9 @@ import { AiOutlineFileAdd } from "react-icons/ai";
 import { useDispatch } from "react-redux";
 import { addExpense } from "../../redux/actions/expenses";
 import { categories } from "../../constants/expensesDropdown";
+import { ToastContainer, toast } from "react-toastify";
+import { v4 as uuidv4 } from "uuid";
+//import SuccessModal from "./sucessModal";
 
 const AddExpenseForm = () => {
   const dropdowncategories = categories;
@@ -36,19 +39,33 @@ const AddExpenseForm = () => {
   const handelSubmit = (e) => {
     e.preventDefault();
     if (title === "" || amount === "" || !category) {
-      console.log("no data");
+      const notify = () => toast("Please fill up");
+      notify();
       return;
     }
     const data = {
+      id: uuidv4(),
       title: title,
       amount: amount,
       category: category,
       createdAt: new Date(),
     };
     dispatch(addExpense(data));
+    const notify = () => toast("Expenditure Added");
+    notify();
+    setTitle("");
+    setAmount("");
+    setCategory("");
   };
   return (
     <div className="w-50 mx-auto my-5">
+      <ToastContainer
+        position="top-right"
+        autoClose={1500}
+        hideProgressBar={true}
+        newestOnTop={false}
+        closeOnClick
+      />
       <Form>
         <InputGroup className="mb-4">
           <InputGroup.Text id="basic-addon1">Title</InputGroup.Text>

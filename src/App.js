@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Header from "./components/header";
 import Footer from "./components/footer";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "react-toastify/dist/ReactToastify.css";
 import AddExpenses from "./pages/addExpenses";
 function App() {
   return (
@@ -14,7 +15,6 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/addexpenses" element={<AddExpenses />} />
         </Routes>
-        <Footer />
       </Router>
     </div>
   );

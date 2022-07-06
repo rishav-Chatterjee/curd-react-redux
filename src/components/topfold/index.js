@@ -5,12 +5,16 @@ import { IoIosAddCircle } from "react-icons/io";
 import { AiOutlineLeft } from "react-icons/ai";
 import { GiCancel } from "react-icons/gi";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { queryExpense } from "../../redux/actions/expenses";
 
 const Topfold = () => {
-  const [query, setQuery] = "";
+  const [query, setQuery] = useState("");
+  const dispatch = useDispatch();
   const handelQuery = (e) => {
     setQuery(e.target.value);
-    console.log(e.target.value);
+    //console.log(e.target.value);
+    dispatch(queryExpense(e.target.value));
   };
   //fn for handel cancel Modal
   const [show, setShow] = useState(false);
