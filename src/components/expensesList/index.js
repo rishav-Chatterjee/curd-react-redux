@@ -1,27 +1,30 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import ExpenseCard from "../expenseCard";
+import { ToastContainer, toast } from "react-toastify";
 
 const ExpensesList = () => {
-  const list = [
-    {
-      title: "Make a purchase",
-      logo: "dssfds",
-      createdAt: Date.now(),
-      amount: 1234,
-    },
-    {
-      title: "Make a purchase2",
-      logo: "fdgdfg",
-      createdAt: Date.now(),
-      amount: 651465,
-    },
-  ];
+  const { expenseList: list, query } = useSelector((state) => state.expenses);
+  const filteredList = list.filter((item) => item.title.includes(query));
+  const notifySucess = () => toast.success("Expenses Deleted !");
+  //console.log(expenses);
   return (
     <div>
-      {list.length ? (
-        list.map((item) => <ExpenseCard item={item} />)
+      <ToastContainer
+        position="top-right"
+        autoClose={1500}
+        hideProgressBar={true}
+        newestOnTop={false}
+        closeOnClick
+      />
+      {filteredList.length ? (
+        filteredList.map((item) => (
+          <ExpenseCard item={item} notifySucess={notifySucess} />
+        ))
       ) : (
-        <div>No Data</div>
+        <div className="d-flex justify-content-center align-items-center p-5">
+          No Data
+        </div>
       )}
     </div>
   );
