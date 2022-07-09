@@ -1,11 +1,7 @@
-import { combineReducers, createStore } from "redux";
-import { expenseReducer } from "../reducers/expenses";
+import { createStore } from "redux";
+import rootReducer from "../reducers/rootReducer";
 
-const reducer = combineReducers({
-  expenses: expenseReducer,
-});
-
-const initialState = {};
-const store = createStore(reducer, initialState);
+/* const initialState = {}; */
+const store = createStore(rootReducer);
 
 export default store;

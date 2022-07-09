@@ -20,7 +20,7 @@ export const deleteExpense = (data) => {
 };
 
 export const queryExpense = (query) => {
-  console.log(query);
+  //console.log(query);
   return {
     type: QUERY_EXPENSE,
     query: query,
