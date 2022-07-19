@@ -4,12 +4,13 @@ import { AiFillEye } from "react-icons/ai";
 import { RiDeleteBinFill } from "react-icons/ri";
 import { Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { getusersStart } from "../../redux/actions/users";
+import { deleteUsersStart, getusersStart } from "../../redux/actions/users";
 import { Link } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 
 const UserList = () => {
   const dispatch = useDispatch();
-  const { usersList } = useSelector((state) => state.usersallList);
+  const { usersList } = useSelector((state) => state.users);
   //console.log(usersList);
 
   useEffect(() => {
@@ -18,16 +19,25 @@ const UserList = () => {
 
   const handelDelete = (id) => {
     console.log(id);
+    dispatch(deleteUsersStart(id));
+    const notify = () => toast("User Deleted!");
+    notify();
   };
 
   return (
     <div>
+      <ToastContainer
+        position="top-right"
+        autoClose={1500}
+        hideProgressBar={true}
+        newestOnTop={false}
+        closeOnClick
+      />
       <Table striped bordered hover className="my-4">
         <thead>
           <tr className="text-center">
             <th>Number</th>
             <th>Name</th>
-            <th>Email</th>
             <th>Address</th>
             <th>Phone</th>
             <th>Company</th>
@@ -40,32 +50,10 @@ const UserList = () => {
               <tr>
                 <th>{index + 1}</th>
                 <td>{user.name}</td>
-                <td>{user.email}</td>
-                <td>
-                  {user.address.suite} - {user.address.city}
-                </td>
+                <td>{user.address}</td>
                 <td>{user.phone}</td>
-                <td>{user.company.name}</td>
-                <td>
-                  <Link
-                    type="button"
-                    className="btn btn-outline-warning"
-                    style={{ fontSize: "14px" }}
-                    to={`/edituser/${user.id}`}
-                  >
-                    <GrEdit />
-                  </Link>
-                </td>
-                <td>
-                  <button
-                    type="button"
-                    className="btn btn-outline-primary"
-                    style={{ fontSize: "14px" }}
-                  >
-                    <AiFillEye />
-                  </button>
-                </td>
-                <td>
+                <td>{user.company}</td>
+                <td className="text-center">
                   <button
                     type="button"
                     className="btn btn-outline-danger"
