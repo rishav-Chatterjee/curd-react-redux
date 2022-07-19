@@ -1,58 +1,61 @@
 import React, { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { Form, Button, Col, Row } from "react-bootstrap";
-
+import { useDispatch, useSelector } from "react-redux";
+import { createUsersStart } from "../../redux/actions/users";
+import { ToastContainer, toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 const initialState = {
   id: uuidv4(),
   name: "",
   username: "",
   email: "",
-  address: {
-    street: "",
-    suite: "",
-    city: "",
-    zipcode: "",
-    geo: {
-      lat: "",
-      lng: "",
-    },
-  },
+  address: "",
+  city: "",
+  zipcode: "",
   phone: "",
   website: "",
-  company: {
-    companyName: "",
-    catchPhrase: "",
-    bs: "",
-  },
+  company: "",
 };
 
 const AddEditUserForm = () => {
   const [formValue, setFormValue] = useState(initialState);
+  const dispatch = useDispatch();
   const {
     name,
     username,
     email,
-    street,
-    suite,
+    address,
     city,
     zipcode,
-    lat,
-    lng,
     phone,
     website,
-    companyName,
-    catchPhrase,
-    bs,
+    company,
   } = formValue;
-  const handelSubmit = () => {};
+
+  const navigate = useNavigate();
+  const handelSubmit = (e) => {
+    e.preventDefault();
+    console.log(formValue, "submit");
+    dispatch(createUsersStart(formValue));
+    const notify = () => toast("User Added");
+    notify();
+    setTimeout(() => navigate("/userlist", { replace: false }), 800);
+  };
   const onInputChange = (e) => {
     let { name, value } = e.target;
     setFormValue({ ...formValue, [name]: value });
-    console.log(formValue);
   };
 
   return (
     <div className="w-75 mx-auto my-4">
+      <ToastContainer
+        position="top-right"
+        autoClose={1500}
+        hideProgressBar={true}
+        newestOnTop={false}
+        closeOnClick
+      />
       <Form onSubmit={handelSubmit}>
         <Row className="mb-3">
           <Form.Group as={Col}>
@@ -84,22 +87,12 @@ const AddEditUserForm = () => {
           </Form.Group>
         </Row>
         <Row className="mb-3">
-          {/*  <Form.Label>Address</Form.Label> */}
           <Form.Group as={Col}>
-            <Form.Label>Street</Form.Label>
+            <Form.Label>Address</Form.Label>
             <Form.Control
               type="text"
-              value={street}
-              name="street"
-              onChange={onInputChange}
-            />
-          </Form.Group>
-          <Form.Group as={Col}>
-            <Form.Label>Suite</Form.Label>
-            <Form.Control
-              type="text"
-              value={suite}
-              name="suite"
+              value={address}
+              name="address"
               onChange={onInputChange}
             />
           </Form.Group>
@@ -118,27 +111,6 @@ const AddEditUserForm = () => {
               type="text"
               value={zipcode}
               name="zipcode"
-              onChange={onInputChange}
-            />
-          </Form.Group>
-        </Row>
-        <Row className="mb-3">
-          <Form.Label>Geo</Form.Label>
-          <Form.Group as={Col}>
-            <Form.Label>Latitude</Form.Label>
-            <Form.Control
-              type="text"
-              value={lat}
-              name="lat"
-              onChange={onInputChange}
-            />
-          </Form.Group>
-          <Form.Group as={Col}>
-            <Form.Label>Longitude</Form.Label>
-            <Form.Control
-              type="text"
-              value={lng}
-              name="lng"
               onChange={onInputChange}
             />
           </Form.Group>
@@ -164,31 +136,12 @@ const AddEditUserForm = () => {
           </Form.Group>
         </Row>
         <Row className="mb-3">
-          <Form.Label>Company</Form.Label>
           <Form.Group as={Col}>
             <Form.Label>Company Name</Form.Label>
             <Form.Control
               type="text"
-              value={companyName}
-              name="companyName"
-              onChange={onInputChange}
-            />
-          </Form.Group>
-          <Form.Group as={Col}>
-            <Form.Label>CatchPhrase</Form.Label>
-            <Form.Control
-              type="text"
-              value={catchPhrase}
-              name="catchPhrase"
-              onChange={onInputChange}
-            />
-          </Form.Group>
-          <Form.Group as={Col}>
-            <Form.Label>Bs</Form.Label>
-            <Form.Control
-              type="text"
-              value={bs}
-              name="bs"
+              value={company}
+              name="company"
               onChange={onInputChange}
             />
           </Form.Group>
