@@ -1,6 +1,4 @@
 import React, { useEffect } from "react";
-import { GrEdit } from "react-icons/gr";
-import { AiFillEye } from "react-icons/ai";
 import { RiDeleteBinFill } from "react-icons/ri";
 import { Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";

@@ -2,7 +2,7 @@ import { createStore, applyMiddleware } from "redux";
 import rootReducer from "../reducers/rootReducer";
 import createSagaMiddleware from "redux-saga";
 //import rootSaga from "../sagas/usersSaga";
-import rootSaga from "../sagas/usersSaga";
+import rootSaga from "../sagas/rootSaga";
 import logger from "redux-logger"; //shows the data flowing through redux in console
 
 /* const initialState = {}; */
